@@ -1,0 +1,36 @@
+{
+  "name": "passporttishtest",
+  "version": "1.0.0",
+  "description": "passport testing",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexSlayton/PassportTishTest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexSlayton/PassportTishTest/issues"
+  },
+  "homepage": "https://github.com/AlexSlayton/PassportTishTest#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.16.1",
+    "connect-flash": "^0.1.1",
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.1",
+    "mongodb": "^2.2.26",
+    "mongoose": "^4.9.5",
+    "mysql": "^2.13.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sequelize": "^3.30.2"
+  }
+}
