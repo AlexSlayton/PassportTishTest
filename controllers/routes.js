@@ -1,4 +1,4 @@
-var db= require('../models');
+var User = require('../models/User.js');
 var path = require ("path");
 
 //create method to authenticate the datapage
@@ -12,7 +12,7 @@ function isAuthenticated(req, res, next) {
 
 module.exports = function(app, passport){
 	app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../views/index.html"));
+    	res.sendFile(path.join(__dirname, "../views/index.html"));
   	});
 
 	app.get("/login", function(req, res) {
@@ -22,7 +22,7 @@ module.exports = function(app, passport){
   	});
 
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/datapage',
+		successRedirect: '/portal',
 		failureRedirect: '/login',
 		failureFlash: true
 	}));
@@ -39,9 +39,9 @@ module.exports = function(app, passport){
 		failureFlash: true
 	}));
 
-	app.get('/datapage', isAuthenticated, function(req, res){
-		console.log('DATAPAGE')
-		res.render('datapage', { user: req.user });
+	app.get('/portal', isAuthenticated, function(req, res){
+		console.log('portal')
+		res.send("PORTAL PAGE HERE");
 	});
 
 

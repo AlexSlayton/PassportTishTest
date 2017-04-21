@@ -1,7 +1,7 @@
 //Dependencies
 //set up express server
 var express = require("express");
-var port = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 var app = express();
 
 //set up other npm
@@ -11,10 +11,15 @@ var exphbs = require("express-handlebars");
 var session = require('express-session');
 var passport = require("passport");
 var flash = require('connect-flash');
-var db = require ('./login');
 var path = require('path');
-var mongodb = require('mongodb');
+
 var mongoose = require('mongoose');
+
+
+mongoose.Promise = Promise;
+
+mongoose.connect('mongodb://localhost/login');
+
 
 SALT_WORK_FACTOR = 12;
 
@@ -35,13 +40,22 @@ app.use(flash());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars", "html");
 
+var db = mongoose.connection;
+db.on("error", function(error){
+    throw error;
+});
+
+db.on("open", function(){
+    console.log("Mongoose connection successful");
+
+});
+
+
 // Import routes and give the server access to them.
 require("./config/passport")(passport);
-require('./controllers/login.js')(app, passport);
-require('./controllers/model_controller')(app);
+require('./controllers/routes.js')(app, passport);
 
 //syncing our sequelize models and then starting express app
-db.mongodb.sync().then(function(){
-	app.listen(port);
-	console.log("running" + port);
+app.listen(PORT, function(){
+    console.log("App is listening on port", PORT);
 });
